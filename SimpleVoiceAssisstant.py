@@ -1,20 +1,20 @@
-#Debadrita Chattopadhyay
-#18 November 2023
-
 import pyttsx3
 import datetime
 import speech_recognition as sr
 import wikipedia
 import webbrowser
 
+#initialize the pyttsx3 engine with the 'sapi5' driver 
 engine = pyttsx3.init('sapi5')
 voices = engine.getProperty('voices')
 engine.setProperty('voices', voices[0].id)
 
+#function to speak the provided text 
 def speak(audio):
     engine.say(audio)
     engine.runAndWait()
-    
+
+#function to greet the user    
 def greetMe():
     hour = int(datetime.datetime.now().hour)
 
@@ -27,6 +27,7 @@ def greetMe():
 
     speak('I am your personal Voice Assistant. How may I help you ?')
 
+#function to listen to user command or query
 def listenQuery():
     recognizer = sr.Recognizer()
 
@@ -46,11 +47,12 @@ def listenQuery():
 
     return query
 
-
+#main function
 if __name__ == "__main__":
     greetMe()
     
     while True:
+        #to convert user query into lowercase to avoid any confusion
         query = listenQuery().lower()
         
         if 'hello' in query:
@@ -81,6 +83,8 @@ if __name__ == "__main__":
         elif 'stop' in query or 'okay' in query or 'thanks' in query:
             speak('I am happy to help you. Bye! ')
             break
+        
+        
         
 
 
